@@ -1,8 +1,8 @@
 export const step_7 = [
   {
     title: 'Costo del apartamento',
-    type: 'input',
-    name: 'mount',
+    type: 'currency',
+    name: 'amount',
     placeholder: '$0.00MXN',
     value: '',
     validations: [

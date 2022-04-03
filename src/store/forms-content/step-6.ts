@@ -5,6 +5,11 @@ export const step_6 = [
     name: 'parking',
     placeholder: '',
     value: 'Si',
+    validations: [
+      {
+        type: 'required',
+      },
+    ],
   },
   {
     title: 'Sin Ascensor',
@@ -12,5 +17,10 @@ export const step_6 = [
     name: 'parking',
     placeholder: '',
     value: 'No',
+    validations: [
+      {
+        type: 'required',
+      },
+    ],
   },
 ];

@@ -5,6 +5,11 @@ export const step_9 = [
     name: 'elevator',
     placeholder: '',
     value: 'Si',
+    validations: [
+      {
+        type: 'required',
+      },
+    ]
   },
   {
     title: 'Ascensor',
@@ -12,5 +17,10 @@ export const step_9 = [
     name: 'elevator',
     placeholder: '',
     value: 'No',
+    validations: [
+      {
+        type: 'required',
+      },
+    ]
   },
 ];

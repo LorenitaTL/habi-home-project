@@ -1,11 +1,13 @@
 import { useCallback } from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'react';
 import { addStep, setActiveStep } from '../store/actionCreator';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MyTextField } from './MyTextField';
+import CurrencyInput from 'react-currency-input-field';
+import * as Yup from 'yup';
 
 // TODO: Add validations
 
@@ -15,10 +17,38 @@ export const DynamicForm = (props: {
   previousStep: IStep | undefined;
 }) => {
   const initialValues: { [key: string]: any } = {};
-  console.log('Initial Values', initialValues);
+  const requiredFields: { [key: string]: any } = {};
   for (const input of props.stepToRender.component) {
+    console.log(input.validations);
     initialValues[input.name] = input.value;
+
+    if (!input.validations) continue;
+
+    let schema = Yup.string();
+
+    for (const rule of input.validations) {
+      if (rule.type === 'required') {
+        schema = schema.required('Este campo es requerido');
+      }
+
+      if (rule.type === 'maxLength') {
+        schema = schema.max(
+          (rule as any).value,
+          `Mínimo de ${(rule as any).value} caracteres`
+        );
+      }
+
+      if (rule.type === 'email') {
+        schema = schema.email(`Revise el formato del email`);
+      }
+
+      // ... otras reglas
+    }
+
+    requiredFields[input.name] = schema;
   }
+
+  const validationSchema = Yup.object({ ...requiredFields });
 
   const dispatch: Dispatch<any> = useDispatch();
 
@@ -37,9 +67,9 @@ export const DynamicForm = (props: {
       <h1 className='text-blue'>{props.stepToRender.title}</h1>
       <Formik
         initialValues={initialValues}
+        validationSchema={ validationSchema }
         onSubmit={(values) => {
           const new_step = { ...props.stepToRender, payload: values };
-          console.log('New step: ', new_step);
           saveStep(new_step);
           if (new_step.step_number < 10 && props.nextStep !== undefined) {
             activeStep(props.nextStep);
@@ -47,7 +77,7 @@ export const DynamicForm = (props: {
         }}
       >
         {(formik) => (
-          <Form>
+          <Form noValidate>
             {props.stepToRender.component.map(
               ({ type, name, placeholder, title, value }, index) => {
                 if (type === 'input' || type === 'email') {
@@ -62,11 +92,33 @@ export const DynamicForm = (props: {
                   );
                 } else if (type === 'checkbox' || type === 'radio') {
                   return (
-                    <label key={index}>
-                      <Field type={type} name={name} value={value} />
+                    <div key={index}>
+                      <label>
+                      <Field type={type} name={name} value={value}  />
                       {value}
                     </label>
+                    <ErrorMessage name={ name } component="span" />
+                    </div>
                   );
+                } else if (type === 'currency') {
+                  return (
+                    <div className='input-form' key={index}>
+                      <label>{title}</label>
+                      <CurrencyInput
+                        className='text-input'
+                        id='input-example'
+                        name={name}
+                        placeholder='Please enter a number'
+                        prefix='$'
+                        defaultValue={0}
+                        onValueChange={(value, name) =>
+                          formik.setFieldValue(name!, value)
+                        }
+                      />
+                    </div>
+                  );
+                } else {
+                  return <></>;
                 }
               }
             )}

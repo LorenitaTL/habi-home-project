@@ -99,13 +99,15 @@ const initialState: StepsState = {
   active_step: steps_first_loaded[0],
 };
 
+sessionStorage.setItem('steps', JSON.stringify(initialState.steps));
+
 const reducer = (
   state: StepsState = initialState,
   action: StepAction
 ): StepsState => {
   switch (action.type) {
     case actionTypes.ADD_STEP:
-      const newStep: IStep = {
+      const new_step: IStep = {
         id: action.step.id,
         title: action.step.title,
         route: action.step.route,
@@ -117,10 +119,11 @@ const reducer = (
       const remove_step = state.steps.filter(
         (step) => step.id !== action.step.id
       );
-      console.log(remove_step);
+      const save_steps = remove_step.concat(new_step);
+      sessionStorage.setItem('steps', JSON.stringify(save_steps));
       return {
         ...state,
-        steps: remove_step.concat(newStep),
+        steps: save_steps,
       };
     case actionTypes.SET_ACTIVE_STEP:
       return {

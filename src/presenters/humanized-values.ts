@@ -22,12 +22,15 @@ export default class StepsDataHumanized {
   }
 
   get recreational_area(): string {
-    // TODO: Completar este get
-    return `El departamento cuenta con: ${this.payload.floor}`;
+    if (!!this.payload.areas){
+      return `El departamento cuenta con: ${this.payload.areas.map((area: any) => area)}`;
+    }
+    return '';
+    
   }
   get parking(): string {
     // TODO: Indicar si está techado
-    return `${this.payload.parking ? 'Sí' : 'No'}`;
+    return `${this.payload.parking}`;
   }
 
   get amount(): string {
