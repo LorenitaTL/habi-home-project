@@ -1,0 +1,146 @@
+:root {
+  --light-blue: #1DCBF2;
+  --blue: #1DDDF2;
+  --light: #F2F2F2;
+  --dark: #0F1926;
+  --gray: #C2D2F2;
+}
+
+body {
+  margin: 0;
+  font-family: 'Hind Madurai', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url(../images/apartment-desktop.jpeg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.main-container {
+  margin: 5rem;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+}
+
+.forms-container {
+  padding: 2rem;
+  width: 45%;
+  background-color: var(--light);
+}
+
+input, select {
+  margin-top: 5px;
+  outline: none;
+  padding: 10px;
+}
+
+.text-input{
+  border: 2px solid var(--light-blue);
+}
+
+.input-form{
+  display: flex;
+  flex-direction: column;
+  margin:1rem;
+}
+
+.resume-container {
+  /*TODO: Add media queries (or classes) for show or hide element*/
+  margin-left: 2rem;
+  width: 35%;
+  padding: 1rem;
+}
+
+.stepper {
+  background-color: #122029;
+  width: 20%;
+  padding: 2rem;
+}
+
+.bg-blue {
+  background-color: var(--blue);
+}
+
+.bg-grey {
+  background-color: var(--gray);
+}
+
+.bg-dark {
+  background-color: var(--dark);
+}
+
+.text-blue {
+  color: var(--blue);
+}
+
+.text-grey {
+  color: var(--gray);
+}
+
+.text-dark {
+  color: var(--dark);
+}
+
+.text-light {
+  color: var(--light);
+}
+
+.text-medium {
+  font-weight: 400;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-flex{
+  display: flex;
+  align-content: center;
+}
+
+.justify-content{
+  justify-content: space-evenly;
+}
+
+.my-2{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.btn-blue{
+  border-radius: 2px;
+  border: 1px solid var(--light);
+  color: var(--light);
+  font-weight: 500;
+  font-size: 1rem;
+  background-color: var(--light-blue);
+  padding:0.7rem;
+}
+
+.btn-dark{
+  border-radius: 2px;
+  border: 1px solid var(--light);
+  color: var(--light);
+  font-weight: 500;
+  font-size: 1rem;
+  background-color: var(--dark);
+  padding:0.7rem;
+}
