@@ -1,7 +1,7 @@
 export const step_2 = [
   {
     title: 'Email',
-    type: 'email',
+    type: 'input',
     name: 'email',
     placeholder: 'example@email.com',
     value: '',

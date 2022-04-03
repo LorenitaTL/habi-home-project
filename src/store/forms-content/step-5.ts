@@ -1,14 +1,23 @@
 export const step_5 = [
   {
-    title: 'Nombre completo',
-    type: 'input',
-    name: 'fullName',
-    placeholder: 'Inserta nombre completo...',
-    value: '',
-    validations: [
-      {
-        type: 'required',
-      },
-    ],
+    title: 'Zona BBQ',
+    type: 'checkbox',
+    name: 'checked',
+    placeholder: '',
+    value: 'Zona BBQ',
+  },
+  {
+    title: 'Salón Comunal',
+    type: 'checkbox',
+    name: 'checked',
+    placeholder: '',
+    value: 'Salón Comunal',
+  },
+  {
+    title: 'Parque de Juegos',
+    type: 'checkbox',
+    name: 'checked',
+    placeholder: '',
+    value: 'Parque de Juegos',
   },
 ];

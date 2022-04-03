@@ -1,9 +1,9 @@
-export const RenderPayload = (props: { payload: any }) => {
-  const entries = Object.entries(props.payload);
-  const listItems = entries.map(([key, value], index) => (
-    <p className="text-light" key={index}>
-      {key}: {value}
+import StepsDataHumanized from '../presenters/humanized-values';
+export const RenderPayload = (props: { payload: any; stepName: string }) => {
+  const step_data_humanized = new StepsDataHumanized(props.payload);
+  return (
+    <p className='text-light'>
+      {step_data_humanized.resumePayload(props.stepName)}
     </p>
-  ));
-  return <div>{listItems}</div>;
+  );
 };

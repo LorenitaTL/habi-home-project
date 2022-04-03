@@ -9,7 +9,7 @@ export const Stepper = (props: { steps: IStep[] }) => {
   );
   return (
     <div className='stepper'>
-      {props.steps.map((step) => (
+      {steps_ordered.map((step) => (
         <div className='step' key={step.id}>
           <div
             className={`${

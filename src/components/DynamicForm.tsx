@@ -1,55 +1,85 @@
 import { useCallback } from 'react';
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'react';
-import {addStep} from '../store/actionCreator';
+import { addStep, setActiveStep } from '../store/actionCreator';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MyTextField } from './MyTextField';
 
 // TODO: Add validations
 
-export const DynamicForm = (props: { step: IStep }) => {
+export const DynamicForm = (props: {
+  stepToRender: IStep;
+  nextStep: IStep | undefined;
+  previousStep: IStep | undefined;
+}) => {
   const initialValues: { [key: string]: any } = {};
-  for (const input of props.step.component) {
+  console.log('Initial Values', initialValues);
+  for (const input of props.stepToRender.component) {
     initialValues[input.name] = input.value;
   }
 
-  const dispatch: Dispatch<any> = useDispatch()
+  const dispatch: Dispatch<any> = useDispatch();
 
   const saveStep = useCallback(
     (step: IStep) => dispatch(addStep(step)),
     [dispatch]
-  )
+  );
+
+  const activeStep = useCallback(
+    (step: IStep) => dispatch(setActiveStep(step)),
+    [dispatch]
+  );
 
   return (
     <div>
-      <h1 className='text-blue'>{props.step.title}</h1>
+      <h1 className='text-blue'>{props.stepToRender.title}</h1>
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
-          const newStep = {...props.step, payload: values};
-          console.log(newStep);
-          saveStep(newStep);
+          const new_step = { ...props.stepToRender, payload: values };
+          console.log('New step: ', new_step);
+          saveStep(new_step);
+          if (new_step.step_number < 10 && props.nextStep !== undefined) {
+            activeStep(props.nextStep);
+          }
         }}
       >
         {(formik) => (
           <Form>
-            {props.step.component.map(
-              ({ type, name, placeholder, title }) => {
-                return (
-                  <MyTextField
-                    key={name}
-                    type={type as any}
-                    name={name}
-                    label={title}
-                    placeholder={placeholder}
-                  />
-                );
+            {props.stepToRender.component.map(
+              ({ type, name, placeholder, title, value }, index) => {
+                if (type === 'input' || type === 'email') {
+                  return (
+                    <MyTextField
+                      key={name}
+                      type={type as any}
+                      name={name}
+                      label={title}
+                      placeholder={placeholder}
+                    />
+                  );
+                } else if (type === 'checkbox' || type === 'radio') {
+                  return (
+                    <label key={index}>
+                      <Field type={type} name={name} value={value} />
+                      {value}
+                    </label>
+                  );
+                }
               }
             )}
-            <div className="d-flex justify-content  my-2">
-              <button type='button' className="btn-dark">
+            <div className='d-flex justify-content  my-2'>
+              <button
+                type='button'
+                className='btn-dark'
+                onClick={() =>
+                  props.previousStep !== undefined
+                    ? activeStep(props.previousStep)
+                    : null
+                }
+              >
                 <FontAwesomeIcon
                   icon={faArrowLeft}
                   style={{
@@ -60,7 +90,7 @@ export const DynamicForm = (props: { step: IStep }) => {
                 />
                 Anterior
               </button>
-              <button type='submit' className="btn-blue">
+              <button type='submit' className='btn-blue'>
                 Siguiente{' '}
                 <FontAwesomeIcon
                   icon={faArrowRight}

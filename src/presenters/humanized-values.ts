@@ -1,4 +1,4 @@
-export default class StepsDataHimanized {
+export default class StepsDataHumanized {
   private payload: any;
 
   public constructor(payload: any) {
@@ -18,29 +18,62 @@ export default class StepsDataHimanized {
   }
 
   get floor(): string {
-      return `Piso número: ${this.payload.floor}`
+    return `Piso número: ${this.payload.floor}`;
   }
 
   get recreational_area(): string {
-      // TODO: Completar este get
-    return `El departamento cuenta con: ${this.payload.floor}`
-}
-get parking(): string {
+    // TODO: Completar este get
+    return `El departamento cuenta con: ${this.payload.floor}`;
+  }
+  get parking(): string {
     // TODO: Indicar si está techado
-    return `${this.payload.parking?'Sí':'No'}`
-}
+    return `${this.payload.parking ? 'Sí' : 'No'}`;
+  }
 
-get amount(): string {
+  get amount(): string {
     return `$${this.payload.amount} MXN`;
-}
+  }
 
-get photo(): string{
+  get photo(): string {
     // TODO: Completar get
     return '';
-}
+  }
 
-get elevator(): string {
-    return `${this.payload.parking?'Sí':'No'}`
-}
+  get elevator(): string {
+    return `${this.payload.parking ? 'Sí' : 'No'}`;
+  }
 
+  resumePayload = (step_name: string) => {
+    switch (step_name) {
+      case 'personal_info':
+        return this.full_name;
+
+      case 'contact_info':
+        return this.contact;
+
+      case 'apartment_address':
+        return this.address;
+
+      case 'floor_number':
+        return this.floor;
+
+      case 'recreational_area':
+        return this.recreational_area;
+
+      case 'parking':
+        return this.parking;
+
+      case 'amount':
+        return this.amount;
+
+      case 'pictures':
+        return this.photo;
+
+      case 'elevator':
+        return this.elevator;
+
+      default:
+        break;
+    }
+  };
 }

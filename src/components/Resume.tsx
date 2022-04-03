@@ -12,7 +12,7 @@ export const Resume: React.FC = () => {
         step.payload !== undefined ? (
           <div key={step.id}>
             <h4 className='text-light'>{step.title}:</h4>
-            <RenderPayload payload={step.payload}/>
+            <RenderPayload payload={step.payload} stepName={step.step_name}/>
           </div>
         ) : null
       )}
