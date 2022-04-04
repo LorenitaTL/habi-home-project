@@ -26,9 +26,6 @@ export const MainContainer = (props: any) => {
     shallowEqual
   );
 
-  console.log(steps);
-  console.log('Active', active_step);
-
   const [showResume, setShowResume] = useState(false);
   return (
     <div className='main-container' style={{ position: 'relative' }}>
