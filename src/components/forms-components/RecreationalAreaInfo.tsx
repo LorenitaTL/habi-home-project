@@ -1,7 +1,30 @@
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addStep, setActiveStep } from '../../store/actionCreator';
+import { useSelector, shallowEqual } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Formik, Field, Form } from 'formik';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-export const RecreationalAreaInfo = () => {
+import { useCallback } from 'react';
+export const RecreationalAreaInfo: React.FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const steps: IStep[] = useSelector(
+    (state: StepsState) => state.steps,
+    shallowEqual
+  );
+  const saveStep = useCallback(
+    (step: IStep) => dispatch(addStep(step)),
+    [dispatch]
+  );
+
+  const activeStep = useCallback(
+    (step: IStep) => dispatch(setActiveStep(step)),
+    [dispatch]
+  );
+
+  const step = steps.find((step) => step.step_number === 5);
+  const next_step = steps.find((step) => step.step_number === 6);
   return (
     <div>
       <h2 className='text-blue'>Información de Contacto</h2>
@@ -10,7 +33,10 @@ export const RecreationalAreaInfo = () => {
           areas: [],
         }}
         onSubmit={(values) => {
-          console.log(values);
+          const new_step = { ...step!, payload: values };
+          activeStep(next_step!);
+          saveStep(new_step);
+          navigate(`../${next_step!.route}`);
         }}
       >
         {(formik) => (
@@ -37,12 +63,7 @@ export const RecreationalAreaInfo = () => {
               <button
                 type='button'
                 className='btn-dark'
-                onClick={
-                  () => console.log()
-                  // props.previousStep !== undefined
-                  //   ? activeStep(props.previousStep)
-                  //   : null
-                }
+                onClick={() => navigate('../floor-number')}
               >
                 <FontAwesomeIcon
                   icon={faArrowLeft}

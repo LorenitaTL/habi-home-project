@@ -1,20 +1,20 @@
-import { useCallback } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useDispatch } from 'react-redux';
-import { Dispatch } from 'react';
-import { addStep, setActiveStep } from '../store/actionCreator';
-import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { MyTextField } from './MyTextField';
-import CurrencyInput from 'react-currency-input-field';
-import * as Yup from 'yup';
+// import { useCallback } from 'react';
+// import { Formik, Form, Field, ErrorMessage } from 'formik';
+// import { useDispatch } from 'react-redux';
+// import { Dispatch } from 'react';
+// import { addStep, setActiveStep } from '../store/actionCreator';
+// import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { MyTextField } from './MyTextField';
+// import CurrencyInput from 'react-currency-input-field';
+// import * as Yup from 'yup';
 export const DynamicForm = (props: {
   stepToRender: IStep;
   nextStep: IStep | undefined;
   previousStep: IStep | undefined;
 }) => {
-  const initialValues: { [key: string]: any } = {};
-  const requiredFields: { [key: string]: any } = {};
+  // const initialValues: { [key: string]: any } = {};
+  // const requiredFields: { [key: string]: any } = {};
   // for (const input of props.stepToRender.component) {
   //   initialValues[input.name] = input.value;
 
@@ -50,18 +50,18 @@ export const DynamicForm = (props: {
   //   requiredFields[input.name] = schema;
   // }
 
-  const validationSchema = Yup.object({ ...requiredFields });
+  // const validationSchema = Yup.object({ ...requiredFields });
 
-  const dispatch: Dispatch<any> = useDispatch();
+  // const dispatch: Dispatch<any> = useDispatch();
 
-  const saveStep = (step: IStep) => {
-    dispatch(addStep(step));
-  };
+  // const saveStep = (step: IStep) => {
+  //   dispatch(addStep(step));
+  // };
 
-  const activeStep = useCallback(
-    (step: IStep) => dispatch(setActiveStep(step)),
-    [dispatch]
-  );
+  // const activeStep = useCallback(
+  //   (step: IStep) => dispatch(setActiveStep(step)),
+  //   [dispatch]
+  // );
 
   return (
     <div>

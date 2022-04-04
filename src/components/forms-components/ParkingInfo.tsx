@@ -1,32 +1,58 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addStep, setActiveStep } from '../../store/actionCreator';
+import { useSelector, shallowEqual } from 'react-redux';
 import * as Yup from 'yup';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-export const ElevatorInfo = () => {
+import { useCallback } from 'react';
+export const ParkingInfo: React.FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const steps: IStep[] = useSelector(
+    (state: StepsState) => state.steps,
+    shallowEqual
+  );
+  const saveStep = useCallback(
+    (step: IStep) => dispatch(addStep(step)),
+    [dispatch]
+  );
+
+  const activeStep = useCallback(
+    (step: IStep) => dispatch(setActiveStep(step)),
+    [dispatch]
+  );
+
+  const step = steps.find((step) => step.step_number === 6);
+  const next_step = steps.find((step) => step.step_number === 7);
   return (
     <div>
-      <h2 className='text-blue'>Elevador</h2>
+      <h2 className='text-blue'>Estacionamiento</h2>
       <Formik
         initialValues={{
-          elevator: '',
+          parking: '',
         }}
         onSubmit={(values) => {
-          console.log(values);
+          const new_step = { ...step!, payload: values };
+          activeStep(next_step!);
+          saveStep(new_step);
+          navigate(`../${next_step!.route}`);
         }}
         validationSchema={Yup.object({
-          elevator: Yup.string().required('Requerido'),
+          parking: Yup.string().required('Requerido'),
         })}
       >
         {(formik) => (
           <Form>
             <div className='input-form'>
-              <p>¿El departamento cuenta con elevador?</p>
+              <p>¿El departamento cuenta con estacionamiento?</p>
               <label>
-                <Field type='radio' name='elevator' value='Si' />
+                <Field type='radio' name='parking' value='Si' />
                 Sí
               </label>
               <label>
-                <Field type='radio' name='elevator' value='No' />
+                <Field type='radio' name='parking' value='No' />
                 No
               </label>
               <ErrorMessage name='parking' component='span' />
@@ -35,12 +61,7 @@ export const ElevatorInfo = () => {
               <button
                 type='button'
                 className='btn-dark'
-                onClick={
-                  () => console.log()
-                  // props.previousStep !== undefined
-                  //   ? activeStep(props.previousStep)
-                  //   : null
-                }
+                onClick={() => navigate('../recreational-area')}
               >
                 <FontAwesomeIcon
                   icon={faArrowLeft}

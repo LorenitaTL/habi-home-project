@@ -1,28 +1,15 @@
 import { v4 as uuid } from 'uuid';
 import * as actionTypes from './actionTypes';
-import AddressInfo from './forms-components/AddressInfo';
-import { ContactInfo } from './forms-components/ContactInfo';
-import PersonalInfo from './forms-components/PersonalInfo';
-import { FloorInfo } from './forms-components/FloorInfo';
-import { RecreationalAreaInfo } from './forms-components/RecreationalAreaInfo';
-import { ParkingInfo } from './forms-components/ParkingInfo';
-import { AmountInfo } from './forms-components/AmountInfo';
-import { PicturesInfo } from './forms-components/PicturesInfo';
-import { ElevatorInfo } from './forms-components/ElevatorInfo';
-import {FinalResume} from '../components/FinalResume';
-import { Link, useNavigate } from 'react-router-dom';
-// import {
-//   step_1,
-//   step_2,
-//   step_3,
-//   step_4,
-//   step_5,
-//   step_6,
-//   step_7,
-//   step_8,
-//   step_9,
-//   step_10,
-// } from './forms-content';
+import { AddressInfo } from '../components/forms-components/AddressInfo';
+import { ContactInfo } from '../components/forms-components/ContactInfo';
+import { PersonalInfo } from '../components/forms-components/PersonalInfo';
+import { FloorInfo } from '../components/forms-components/FloorInfo';
+import { RecreationalAreaInfo } from '../components/forms-components/RecreationalAreaInfo';
+import { ParkingInfo } from '../components/forms-components/ParkingInfo';
+import { AmountInfo } from '../components/forms-components/AmountInfo';
+import { PicturesInfo } from '../components/forms-components/PicturesInfo';
+import { ElevatorInfo } from '../components/forms-components/ElevatorInfo';
+import { FinalResume } from '../components/FinalResume';
 const steps_first_loaded: IStep[] = [
   {
     id: uuid(),
@@ -30,7 +17,7 @@ const steps_first_loaded: IStep[] = [
     route: 'personal-info',
     step_name: 'personal_info',
     step_number: 1,
-    component: PersonalInfo(),
+    component: PersonalInfo,
   },
   {
     id: uuid(),
@@ -38,7 +25,7 @@ const steps_first_loaded: IStep[] = [
     route: 'contact-info',
     step_name: 'contact_info',
     step_number: 2,
-    component: ContactInfo(),
+    component: ContactInfo,
   },
   {
     id: uuid(),
@@ -46,7 +33,7 @@ const steps_first_loaded: IStep[] = [
     route: 'apartment-address',
     step_name: 'apartment_address',
     step_number: 3,
-    component: AddressInfo(),
+    component: AddressInfo,
   },
   {
     id: uuid(),
@@ -54,15 +41,15 @@ const steps_first_loaded: IStep[] = [
     route: 'floor-number',
     step_name: 'floor_number',
     step_number: 4,
-    component: FloorInfo(),
+    component: FloorInfo,
   },
   {
     id: uuid(),
     description: 'Área recreativa',
-    route: 'area-recreativa',
+    route: 'recreational-area',
     step_name: 'recreational_area',
     step_number: 5,
-    component: RecreationalAreaInfo(),
+    component: RecreationalAreaInfo,
   },
   {
     id: uuid(),
@@ -70,7 +57,7 @@ const steps_first_loaded: IStep[] = [
     route: 'parking',
     step_name: 'parking',
     step_number: 6,
-    component: ParkingInfo(),
+    component: ParkingInfo,
   },
   {
     id: uuid(),
@@ -78,7 +65,7 @@ const steps_first_loaded: IStep[] = [
     route: 'amount',
     step_name: 'amount',
     step_number: 7,
-    component: AmountInfo(),
+    component: AmountInfo,
   },
   {
     id: uuid(),
@@ -86,15 +73,15 @@ const steps_first_loaded: IStep[] = [
     route: 'pictures',
     step_name: 'pictures',
     step_number: 8,
-    component: PicturesInfo(),
+    component: PicturesInfo,
   },
   {
     id: uuid(),
     description: 'Elevador',
-    route: 'elevador',
+    route: 'elevator',
     step_name: 'elevator',
     step_number: 9,
-    component: ElevatorInfo(),
+    component: ElevatorInfo,
   },
   {
     id: uuid(),
@@ -102,7 +89,7 @@ const steps_first_loaded: IStep[] = [
     route: 'ready',
     step_name: 'ready',
     step_number: 10,
-    component: AddressInfo(),
+    component: FinalResume,
   },
 ];
 const initialState: StepsState = {

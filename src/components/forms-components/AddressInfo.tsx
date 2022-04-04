@@ -1,9 +1,32 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addStep, setActiveStep } from '../../store/actionCreator';
+import { useSelector, shallowEqual } from 'react-redux';
 import * as Yup from 'yup';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { useCallback } from 'react';
 
-export default function AddressInfo() {
+export const AddressInfo: React.FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const steps: IStep[] = useSelector(
+    (state: StepsState) => state.steps,
+    shallowEqual
+  );
+  const saveStep = useCallback(
+    (step: IStep) => dispatch(addStep(step)),
+    [dispatch]
+  );
+
+  const activeStep = useCallback(
+    (step: IStep) => dispatch(setActiveStep(step)),
+    [dispatch]
+  );
+
+  const step = steps.find((step) => step.step_number === 3);
+  const next_step = steps.find((step) => step.step_number === 4);
   return (
     <div>
       <h2 className='text-blue'>Dirección del departamento</h2>
@@ -16,7 +39,10 @@ export default function AddressInfo() {
           postal_code: '',
         }}
         onSubmit={(values) => {
-          console.log(values);
+          const new_step = { ...step!, payload: values };
+          activeStep(next_step!);
+          saveStep(new_step);
+          navigate(`../${next_step!.route}`);
         }}
         validationSchema={Yup.object({
           street: Yup.string().required('Requerido'),
@@ -57,12 +83,7 @@ export default function AddressInfo() {
               <button
                 type='button'
                 className='btn-dark'
-                onClick={
-                  () => console.log()
-                  // props.previousStep !== undefined
-                  //   ? activeStep(props.previousStep)
-                  //   : null
-                }
+                onClick={() => navigate('../contact-info')}
               >
                 <FontAwesomeIcon
                   icon={faArrowLeft}

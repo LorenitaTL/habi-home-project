@@ -13,7 +13,7 @@ export const HomePage = () => {
     >
       <h2>¿Quieres vender tu departamento?</h2>
       <p>¡Nosotros te ayudamos!</p>
-      <NavLink to='/register'>
+      <NavLink to='/register/personal-info'>
         <button className='btn-blue'>Comenzar</button>
       </NavLink>
     </div>

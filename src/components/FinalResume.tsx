@@ -12,10 +12,18 @@ export const FinalResume: React.FC = () => {
         step.payload !== undefined ? (
           <div key={step.id}>
             <h4 className='text-dark'>{step.description}:</h4>
-            <RenderPayload payload={step.payload} stepName={step.step_name} colorText={'text-dark'}/>
+            <RenderPayload
+              payload={step.payload}
+              stepName={step.step_name}
+              colorText={'text-dark'}
+            />
           </div>
         ) : null
       )}
+      <button
+      className='btn-blue text-light'
+      onClick={()=>window.location.href = "/"}
+      >Aceptar</button>
     </div>
   );
 };

@@ -1,9 +1,32 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Form, ErrorMessage } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addStep, setActiveStep } from '../../store/actionCreator';
+import { useSelector, shallowEqual } from 'react-redux';
 import * as Yup from 'yup';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import CurrencyInput from 'react-currency-input-field';
-export const AmountInfo = () => {
+import { useCallback } from 'react';
+export const AmountInfo:React.FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const steps: IStep[] = useSelector(
+    (state: StepsState) => state.steps,
+    shallowEqual
+  );
+  const saveStep =  useCallback(
+    (step: IStep) => dispatch(addStep(step)),
+    [dispatch]
+  );
+
+  const activeStep = useCallback(
+    (step: IStep) => dispatch(setActiveStep(step)),
+    [dispatch]
+  );
+
+  const step = steps.find((step) => step.step_number === 7);
+  const next_step = steps.find((step) => step.step_number === 8);
   return (
     <div>
       <h2 className='text-blue'>Costo</h2>
@@ -12,7 +35,10 @@ export const AmountInfo = () => {
           amount: '',
         }}
         onSubmit={(values) => {
-          console.log(values);
+          const new_step = { ...step!, payload: values };
+          activeStep(next_step!);
+          saveStep(new_step);
+          navigate(`../${next_step!.route}`);
         }}
         validationSchema={Yup.object({
           amount: Yup.string().required('Requerido').min(2),
@@ -39,12 +65,7 @@ export const AmountInfo = () => {
               <button
                 type='button'
                 className='btn-dark'
-                onClick={
-                  () => console.log()
-                  // props.previousStep !== undefined
-                  //   ? activeStep(props.previousStep)
-                  //   : null
-                }
+                onClick={() => navigate('../parking')}
               >
                 <FontAwesomeIcon
                   icon={faArrowLeft}
