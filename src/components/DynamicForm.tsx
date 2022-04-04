@@ -15,40 +15,40 @@ export const DynamicForm = (props: {
 }) => {
   const initialValues: { [key: string]: any } = {};
   const requiredFields: { [key: string]: any } = {};
-  for (const input of props.stepToRender.component) {
-    initialValues[input.name] = input.value;
+  // for (const input of props.stepToRender.component) {
+  //   initialValues[input.name] = input.value;
 
-    if (!input.validations) continue;
+  //   if (!input.validations) continue;
 
-    let schema = Yup.string();
+  //   let schema = Yup.string();
 
-    for (const rule of input.validations) {
-      if (rule.type === 'required') {
-        schema = schema.required('Este campo es requerido');
-      }
+  //   for (const rule of input.validations) {
+  //     if (rule.type === 'required') {
+  //       schema = schema.required('Este campo es requerido');
+  //     }
 
-      if (rule.type === 'maxLength') {
-        schema = schema.max(
-          (rule as any).value,
-          `Mínimo de ${(rule as any).value} caracteres`
-        );
-      }
+  //     if (rule.type === 'maxLength') {
+  //       schema = schema.max(
+  //         (rule as any).value,
+  //         `Mínimo de ${(rule as any).value} caracteres`
+  //       );
+  //     }
 
-      if (rule.type === 'maxNumber') {
-        schema = schema.test(
-          'Menor a 50?',
-          `El número máximo es de ${rule.value}`,
-          (value) => parseInt(value!) <= rule.value
-        );
-      }
+  //     if (rule.type === 'maxNumber') {
+  //       schema = schema.test(
+  //         'Menor a 50?',
+  //         `El número máximo es de ${rule.value}`,
+  //         (value) => parseInt(value!) <= rule.value
+  //       );
+  //     }
 
-      if (rule.type === 'email') {
-        schema = schema.email(`Revise el formato del email`);
-      }
-    }
+  //     if (rule.type === 'email') {
+  //       schema = schema.email(`Revise el formato del email`);
+  //     }
+  //   }
 
-    requiredFields[input.name] = schema;
-  }
+  //   requiredFields[input.name] = schema;
+  // }
 
   const validationSchema = Yup.object({ ...requiredFields });
 
@@ -65,7 +65,7 @@ export const DynamicForm = (props: {
 
   return (
     <div>
-      <h1 className='text-blue'>{props.stepToRender.description}</h1>
+      {/* <h1 className='text-blue'>{props.stepToRender.description}</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -171,7 +171,7 @@ export const DynamicForm = (props: {
             </div>
           </Form>
         )}
-      </Formik>
+      </Formik> */}
     </div>
   );
 };

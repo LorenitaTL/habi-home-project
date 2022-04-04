@@ -13,30 +13,20 @@ export const Navigation = () => {
     (state: StepsState) => state.steps,
     shallowEqual
   );
-
-  const routes = steps.map((step, index) => {
-    return (
-      <Route
-        key={index}
-        path={step.route!}
-        element={step.component}
-      />
-    );
-  });
   return (
     <BrowserRouter>
       <div className='main-layout'>
         <Routes>
           <Route
-            path='/register'
+            path='/register/*'
             element={
               <div className='app'>
-                <MainContainer/>
+                <MainContainer />
               </div>
             }
           >
           </Route>
-          <Route path='' element={<HomePage/>}></Route>
+          <Route path='' element={<HomePage />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

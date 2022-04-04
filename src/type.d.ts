@@ -5,7 +5,7 @@ interface IStep {
   step_number: number;
   route?: string;
   payload?: Record<string, any>;
-  component: any[];
+  component: JSX.Element;
 }
 
 type StepsState = {
