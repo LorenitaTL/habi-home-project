@@ -1,14 +1,9 @@
 export const step_8 = [
   {
     title: 'Nombre completo',
-    type: 'input',
-    name: 'fullName',
+    type: 'file',
+    name: 'photo',
     placeholder: 'Inserta nombre completo...',
     value: '',
-    validations: [
-      {
-        type: 'required',
-      },
-    ],
   },
 ];

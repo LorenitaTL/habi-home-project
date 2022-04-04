@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 
-// TODO: Save in session
+// TODO: Save in session storage
 export function addStep(step: IStep) {
   const action: StepAction = {
     type: actionTypes.ADD_STEP,

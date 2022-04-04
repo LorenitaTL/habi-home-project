@@ -11,7 +11,7 @@ export const FinalResume: React.FC = () => {
       {steps.map((step: IStep) =>
         step.payload !== undefined ? (
           <div key={step.id}>
-            <h4 className='text-dark'>{step.title}:</h4>
+            <h4 className='text-dark'>{step.description}:</h4>
             <RenderPayload payload={step.payload} stepName={step.step_name} colorText={'text-dark'}/>
           </div>
         ) : null

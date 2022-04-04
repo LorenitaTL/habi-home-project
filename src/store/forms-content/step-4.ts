@@ -9,6 +9,10 @@ export const step_4 = [
       {
         type: 'required',
       },
+      {
+        type: 'maxNumber',
+        value: 50,
+      },
     ],
   },
 ];

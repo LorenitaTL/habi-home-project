@@ -1,12 +1,16 @@
 import React from 'react';
-import { MainContainer } from './components/MainContainer';
+import { MainContainer } from './pages/MainContainer';
 import { Resume } from './components/Resume';
+import { Navigation } from './routes/Navigation';
 
 const App: React.FC = () => {
   return (
-    <div className="app">|
-      <MainContainer/>
-    </div>
+    <>
+    <Navigation />
+    </>
+    // <div className="app">|
+    //   <MainContainer/>
+    // </div>
   );
 }
 

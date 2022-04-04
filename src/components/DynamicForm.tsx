@@ -8,9 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MyTextField } from './MyTextField';
 import CurrencyInput from 'react-currency-input-field';
 import * as Yup from 'yup';
-
-// TODO: Add validations
-
 export const DynamicForm = (props: {
   stepToRender: IStep;
   nextStep: IStep | undefined;
@@ -19,7 +16,6 @@ export const DynamicForm = (props: {
   const initialValues: { [key: string]: any } = {};
   const requiredFields: { [key: string]: any } = {};
   for (const input of props.stepToRender.component) {
-    console.log(input.validations);
     initialValues[input.name] = input.value;
 
     if (!input.validations) continue;
@@ -38,11 +34,17 @@ export const DynamicForm = (props: {
         );
       }
 
+      if (rule.type === 'maxNumber') {
+        schema = schema.test(
+          'Menor a 50?',
+          `El número máximo es de ${rule.value}`,
+          (value) => parseInt(value!) <= rule.value
+        );
+      }
+
       if (rule.type === 'email') {
         schema = schema.email(`Revise el formato del email`);
       }
-
-      // ... otras reglas
     }
 
     requiredFields[input.name] = schema;
@@ -52,10 +54,9 @@ export const DynamicForm = (props: {
 
   const dispatch: Dispatch<any> = useDispatch();
 
-  const saveStep = useCallback(
-    (step: IStep) => dispatch(addStep(step)),
-    [dispatch]
-  );
+  const saveStep = (step: IStep) => {
+    dispatch(addStep(step));
+  };
 
   const activeStep = useCallback(
     (step: IStep) => dispatch(setActiveStep(step)),
@@ -64,10 +65,10 @@ export const DynamicForm = (props: {
 
   return (
     <div>
-      <h1 className='text-blue'>{props.stepToRender.title}</h1>
+      <h1 className='text-blue'>{props.stepToRender.description}</h1>
       <Formik
         initialValues={initialValues}
-        validationSchema={ validationSchema }
+        validationSchema={validationSchema}
         onSubmit={(values) => {
           const new_step = { ...props.stepToRender, payload: values };
           saveStep(new_step);
@@ -94,10 +95,10 @@ export const DynamicForm = (props: {
                   return (
                     <div key={index}>
                       <label>
-                      <Field type={type} name={name} value={value}  />
-                      {value}
-                    </label>
-                    <ErrorMessage name={ name } component="span" />
+                        <Field type={type} name={name} value={value} />
+                        {value}
+                      </label>
+                      <ErrorMessage name={name} component='span' />
                     </div>
                   );
                 } else if (type === 'currency') {
@@ -116,6 +117,20 @@ export const DynamicForm = (props: {
                         }
                       />
                     </div>
+                  );
+                } else if (type === 'file') {
+                  return (
+                    <input
+                      key={index}
+                      name={name}
+                      type={type}
+                      onChange={(event) => {
+                        formik.setFieldValue(
+                          event.target.name,
+                          event.currentTarget.files![0]
+                        );
+                      }}
+                    />
                   );
                 } else {
                   return <></>;

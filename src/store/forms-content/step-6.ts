@@ -1,6 +1,6 @@
 export const step_6 = [
   {
-    title: 'Con Ascensor',
+    title: 'Con Estacionamiento',
     type: 'radio',
     name: 'parking',
     placeholder: '',
@@ -12,7 +12,7 @@ export const step_6 = [
     ],
   },
   {
-    title: 'Sin Ascensor',
+    title: 'Sin Estacionamiento',
     type: 'radio',
     name: 'parking',
     placeholder: '',

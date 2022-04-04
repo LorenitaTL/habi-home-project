@@ -1,8 +1,8 @@
 import { useSelector, shallowEqual } from 'react-redux';
-import { Stepper } from './Stepper';
-import { Resume } from './Resume';
-import { DynamicForm } from './DynamicForm';
-import { FinalResume } from './FinalResume';
+import { Stepper } from '../components/Stepper';
+import { Resume } from '../components/Resume';
+import { DynamicForm } from '../components/DynamicForm';
+import { FinalResume } from '../components/FinalResume';
 import { useState } from 'react';
 import { useIsMobile } from '../hooks/useIsMobile';
 export const MainContainer: React.FC = () => {
@@ -48,7 +48,7 @@ export const MainContainer: React.FC = () => {
       {showResume && is_mobile ? (
         <div
           className='bg-dark'
-          style={{ position: 'absolute', top: 0, bottom: 0,left: 0}}
+          style={{ position: 'absolute', top: 0, bottom: 0, left: 0 }}
         >
           <Resume></Resume>
           <div className='d-flex justify-content'>

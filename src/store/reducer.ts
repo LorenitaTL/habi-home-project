@@ -12,10 +12,10 @@ import {
   step_9,
   step_10,
 } from './forms-content';
-const steps_first_loaded = [
+const steps_first_loaded: IStep[] = [
   {
     id: uuid(),
-    title: 'Información Personal',
+    description: 'Información Personal',
     route: 'personal-info',
     step_name: 'personal_info',
     step_number: 1,
@@ -23,7 +23,7 @@ const steps_first_loaded = [
   },
   {
     id: uuid(),
-    title: 'Contacto',
+    description: 'Contacto',
     route: 'contact-info',
     step_name: 'contact_info',
     step_number: 2,
@@ -31,7 +31,7 @@ const steps_first_loaded = [
   },
   {
     id: uuid(),
-    title: 'Dirección',
+    description: 'Dirección',
     route: 'apartment-address',
     step_name: 'apartment_address',
     step_number: 3,
@@ -39,7 +39,7 @@ const steps_first_loaded = [
   },
   {
     id: uuid(),
-    title: 'Piso',
+    description: 'Piso',
     route: 'floor-number',
     step_name: 'floor_number',
     step_number: 4,
@@ -47,7 +47,7 @@ const steps_first_loaded = [
   },
   {
     id: uuid(),
-    title: 'Área recreativa',
+    description: 'Área recreativa',
     route: 'area-recreativa',
     step_name: 'recreational_area',
     step_number: 5,
@@ -55,7 +55,7 @@ const steps_first_loaded = [
   },
   {
     id: uuid(),
-    title: 'Estacionamiento',
+    description: 'Estacionamiento',
     route: 'parking',
     step_name: 'parking',
     step_number: 6,
@@ -63,7 +63,7 @@ const steps_first_loaded = [
   },
   {
     id: uuid(),
-    title: 'Costo',
+    description: 'Costo',
     route: 'amount',
     step_name: 'amount',
     step_number: 7,
@@ -71,7 +71,7 @@ const steps_first_loaded = [
   },
   {
     id: uuid(),
-    title: ' Fotos',
+    description: ' Fotos',
     route: 'pictures',
     step_name: 'pictures',
     step_number: 8,
@@ -79,7 +79,7 @@ const steps_first_loaded = [
   },
   {
     id: uuid(),
-    title: 'Elevador',
+    description: 'Elevador',
     route: 'elevador',
     step_name: 'elevator',
     step_number: 9,
@@ -87,7 +87,7 @@ const steps_first_loaded = [
   },
   {
     id: uuid(),
-    title: '¡Listo!',
+    description: '¡Listo!',
     route: 'ready',
     step_name: 'ready',
     step_number: 10,
@@ -109,7 +109,7 @@ const reducer = (
     case actionTypes.ADD_STEP:
       const new_step: IStep = {
         id: action.step.id,
-        title: action.step.title,
+        description: action.step.description,
         route: action.step.route,
         step_name: action.step.step_name,
         step_number: action.step.step_number,

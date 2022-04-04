@@ -29,7 +29,6 @@ export default class StepsDataHumanized {
     
   }
   get parking(): string {
-    // TODO: Indicar si está techado
     return `${this.payload.parking}`;
   }
 
@@ -38,8 +37,7 @@ export default class StepsDataHumanized {
   }
 
   get photo(): string {
-    // TODO: Completar get
-    return '';
+    return this.payload.photo.name;
   }
 
   get elevator(): string {
